@@ -1,7 +1,5 @@
-import { Suspense, ErrorBoundary } from "react";
 import { Routes, Route } from "react-router-dom";
-import axios from "axios";
-import useSWR, { SWRConfig } from "swr";
+import useSWR from "swr";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
