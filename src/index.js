@@ -3,11 +3,25 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import axios from "axios";
+import { SWRConfig } from "swr";
+
+const instance = axios.create({
+  baseURL: `${process.env.REACT_APP_API}/api/`,
+});
+
+const fetcher = (url) => instance.get(url).then((res) => res.data);
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <SWRConfig
+        value={{
+          fetcher,
+        }}
+      >
+        <App />
+      </SWRConfig>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

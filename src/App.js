@@ -1,4 +1,7 @@
+import { Suspense, ErrorBoundary } from "react";
 import { Routes, Route } from "react-router-dom";
+import axios from "axios";
+import useSWR, { SWRConfig } from "swr";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -11,6 +14,10 @@ import Signup from "./screens/Signup";
 const theme = createTheme();
 
 function App() {
+  const { data, error } = useSWR("/heartbeat");
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
